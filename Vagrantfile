@@ -4,13 +4,22 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-VM_TYPE_01 = ENV['ATG_VM_TYPE_01'] || 2
-#BOX_URL = ENV['ATG_BOX_URL'] || 'http://files.vagrantup.com/precise64.box'
-#BOX_URL = ENV['ATG_BOX_URL'] || 'https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box'
-BOX_URL = ENV['ATG_BOX_URL'] || 'http://basebox.libera.cc/debian-wheezy-64.bo'
+# We can create more VM Types easy if needed. The last number is how many
+# instance should be started.  To override this just export the environmental 
+# variable before provisioning.
+#
+# VM_TYPE_X = ENV['ATG_VM_TYPE_X'] || 1
+VM_TYPE_01 = ENV['ATG_VM_TYPE_01'] || 1
+VM_TYPE_NAME_01 = ENV['ATG_VM_TYPE_NAME_01'] || 'controller'
+
+# The location of the vagrant box to use
+BOX_URL = ENV['ATG_BOX_URL'] || 'http://basebox.libera.cc/debian-wheezy-64.box'
+
+# The above image is named bellow. If you already have added a vitualbox image
+# named 'debian7' just override the environmental variable.
 BOX_NAME = ENV['ATG_BOX_NAME'] || 'debian7'
 
-# 
+# Doing the hardwork in a loop
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   (1..VM_TYPE_01).each do |i|
     config.vm.define "controller#{i}" do |vm_config|
