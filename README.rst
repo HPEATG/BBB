@@ -39,9 +39,7 @@ A common development environment when working with multiple individules.
 
 #. Configuration
     Create yourself a ``servers.yaml`` file before running the command ``vagrant up``.  You
-    can use the example.yaml as a starting point. 
-
-:: 
+    can use the example.yaml as a starting point:: 
 
     - name: jump-01
        box: debian7
