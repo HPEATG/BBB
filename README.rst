@@ -39,28 +39,30 @@ A common development environment when working with multiple individules.
 
 #. Configuration
     Create yourself a ``servers.yaml`` file before running the command ``vagrant up``.  You
-    can use the example.yaml as a starting point:: 
+    can use the example.yaml as a starting point
+    
+    .. code-block:: yaml
 
-    - name: jump-01
-       box: debian7
-       box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-       ram: 512
-       ip: 172.17.8.101
-       ansible: "ansible/main.yml"
+       - name: jump-01
+          box: debian7
+          box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
+          ram: 512
+          ip: 172.17.8.101
+          ansible: "ansible/main.yml"
 
-    - name: minion-01
-      box: debian7
-      box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-      ram: 512
-      ip: 172.17.8.102
-      ansible: "ansible/main.yml"
+       - name: minion-01
+         box: debian7
+         box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
+         ram: 512
+         ip: 172.17.8.102
+         ansible: "ansible/main.yml"
 
-    - name: minion-02
-      box: debian7
-      box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-      ram: 512
-      ip: 172.17.8.103
-      ansible: "ansible/main.yml"
+       - name: minion-02
+         box: debian7
+         box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
+         ram: 512
+         ip: 172.17.8.103
+         ansible: "ansible/main.yml"
 
 
 #. Run
