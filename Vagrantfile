@@ -33,16 +33,3 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 end
-
-
-## Doing the hardwork in a loop
-#Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-#  (1..VM_TYPE_01).each do |i|
-#    config.vm.define "controller#{i}" do |vm_config|
-#      vm_config.vm.box = BOX_NAME
-#      vm_config.vm.box_url = BOX_URL
-#      vm_config.vm.hostname = "controller#{i}"
-#      vm_config.vm.network :private_network, ip: "10.1.1.10#{i}", :netmask => "255.255.0.0"
-#    end
-#  end
-#end
