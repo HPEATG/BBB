@@ -1,2 +1,3 @@
 .vagrant/
 servers.yaml
+ansible.cfg
