@@ -1,0 +1,32 @@
+---
+#    Example with hash anchor and flow merges
+virtualbox: &virtualbox
+  box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
+  box: "debian7"
+  ram: "512"
+
+defaults: &defaults
+  <<: *virtualbox
+
+servers:
+  - name: gatekeeper
+    <<: *defaults
+    ansible: "ansible/main.yml"
+    #ip: "172.17.8.100"  # If you rather not have Virtualbox use DHCP 
+    #bridge: "en1: Wi-Fi (AirPort)"
+
+  - name: minion-01
+    <<: *defaults
+    ansible: "ansible/main.yml"
+    #ip: "172.17.8.101"
+
+  - name: minion-02
+    <<: *defaults
+    ansible: "ansible/main.yml"
+    #ip: "172.17.8.102"
+
+  - name: minion-03
+    <<: *defaults
+    ansible: "ansible/main.yml"
+    #ip: "172.17.8.103"
+  
