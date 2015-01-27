@@ -73,25 +73,86 @@ A common development environment when working with multiple individules.
     - Create a more robust ``example.yaml`` that will allow defaults to be referenced.
       Maybe this can be done with yaml anchors. This will require reworking the ``Vagrantfile`` also.
 
-:: 
+    .. code-block:: yaml
 
-	# Example with hash anchor and flow merges
-	---
-	key_one: &anchor
-	  sub_key_one: value one
-	  sub_key_two: value two
-	key_two:
-	  sub_key_three: value three
-	  <<: *anchor
-	-->
-	{
-	    "key_two" => {
-	        "sub_key_three" => "value three",
-	          "sub_key_two" => "value two",
-	          "sub_key_one" => "value one"
-	    },
-	    "key_one" => {
-	        "sub_key_two" => "value two",
-	        "sub_key_one" => "value one"
-	    }
-	}
+        ---
+        #    Example with hash anchor and flow merges
+        virtualbox: &virtualbox
+          box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
+          box: "debian7"
+          ram: "512"
+
+        # If you had another environment you could point
+        # to that instead
+        defaults: &defaults
+          <<: *virtualbox
+
+        servers:
+          - name: gatekeeper
+            <<: *defaults
+            ansible: "ansible/main.yml"
+            # ip: "172.17.8.100"
+            # bridge: "en1: Wi-Fi (AirPort)"
+
+          - name: minion-01
+            <<: *defaults
+            ansible: "ansible/main.yml"
+            # ip: "172.17.8.101"
+
+          - name: minion-02
+            <<: *defaults
+            ansible: "ansible/main.yml"
+            # ip: "172.17.8.102"
+        
+          - name: minion-03
+            <<: *defaults
+            ansible: "ansible/main.yml"
+            # ip: "172.17.8.103"
+
+    - The above then is transformed into a full config. I outputed a JSON version just
+      to verify the YAML was valid.
+
+    .. code-block:: json
+
+        {
+            "virtualbox": {
+              "box": "debian7", 
+              "ram": "512", 
+              "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+            }, 
+            "defaults": {
+              "box": "debian7", 
+              "ram": "512", 
+              "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+            }, 
+            "servers": [
+              {
+                "box": "debian7", 
+                "ram": "512", 
+                "ansible": "ansible/main.yml", 
+                "name": "gatekeeper", 
+                "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+              }, 
+              {
+                "box": "debian7", 
+                "ram": "512", 
+                "ansible": "ansible/main.yml", 
+                "name": "minion-01", 
+                "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+              }, 
+              {
+                "box": "debian7", 
+                "ram": "512", 
+                "ansible": "ansible/main.yml", 
+                "name": "minion-02", 
+                "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+              }, 
+              {
+                "box": "debian7", 
+                "ram": "512", 
+                "ansible": "ansible/main.yml", 
+                "name": "minion-03", 
+                "box_url": "http://basebox.libera.cc/debian-wheezy-64.box"
+              }
+            ]
+          }
