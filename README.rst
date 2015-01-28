@@ -33,46 +33,16 @@ A common development environment when working with multiple individules.
 
 #. Requirements
 
-   - Vagrant
-   - Ansible 
-   - VirtualBox
+   - `Vagrant 1.6.3 <https://www.vagrantup.com/>`_
+   - `Ansible 1.8 <http://www.ansible.com/>`_
+   - `VirtualBox 4.3.20r96996 <https://www.virtualbox.org>`_
 
 #. Configuration
-    Create yourself a ``servers.yaml`` file before running the command ``vagrant up``.  You
-    can use the example.yaml as a starting point
+    Create yourself a ``servers.yaml`` and a ``ansible.cfg`` file before running the command ``vagrant up``.
     
-    .. code-block:: yaml
-
-       - name: jump-01
-          box: debian7
-          box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-          ram: 512
-          ip: 172.17.8.101
-          ansible: "ansible/main.yml"
-
-       - name: minion-01
-         box: debian7
-         box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-         ram: 512
-         ip: 172.17.8.102
-         ansible: "ansible/main.yml"
-
-       - name: minion-02
-         box: debian7
-         box_url: "http://basebox.libera.cc/debian-wheezy-64.box"
-         ram: 512
-         ip: 172.17.8.103
-         ansible: "ansible/main.yml"
-
-
-#. Run
-    Run the command ``vagrant up``
-
-#. Trouble shooting
-#. Todo
-    - Create a more robust ``example.yaml`` that will allow defaults to be referenced.
-      Maybe this can be done with yaml anchors. This will require reworking the ``Vagrantfile`` also.
-
+    You can use ones located in the ``examples/`` directory as a starting point.  I have left some variables
+    commented out. You may want to set your own ``ip:`` or ``bridge:``.
+    
     .. code-block:: yaml
 
         ---
@@ -109,8 +79,7 @@ A common development environment when working with multiple individules.
             ansible: "ansible/main.yml"
             # ip: "172.17.8.103"
 
-    - The above then is transformed into a full config. I outputed a JSON version just
-      to verify the YAML was valid.
+    -  Bellow is a JSON version just to verify the YAML would be valid.
 
     .. code-block:: json
 
@@ -156,3 +125,9 @@ A common development environment when working with multiple individules.
               }
             ]
           }
+
+#. Run
+    Run the command ``vagrant up``
+
+#. Trouble shooting
+#. Todo
