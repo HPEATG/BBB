@@ -39,9 +39,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
       
       if servers["ip"] # If the ip is not set assume dhcp instead
-        vm_config.vm.network "private_network", ip: servers["ip"],  virtualbox__intnet: true
+        # I am not sure if using "virtualbox__intnet: true" would be helpful
+        vm_config.vm.network "private_network", ip: servers["ip"] 
       else
-        vm_config.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+        vm_config.vm.network "private_network", type: "dhcp"
       end
       
       # If we want to provision the VM with ansible 
