@@ -1,0 +1,28 @@
+---
+- name: Install requirements for Ansible
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - python-pip
+    - python-dev
+    - git
+
+- name: Install pip package requirements for Ansible
+  pip: name={{ item }}
+  with_items:
+    - PyYAML
+    - jinja2
+    - paramiko
+
+- name: Install Ansible from github
+  git: repo=https://github.com/ansible/ansible.git
+       dest=/srv/ansible
+       version=v1.8.2
+       depth=1
+
+- name: Run make install for Ansible
+  command: make install
+  args:
+    chdir: /srv/ansible
+    creates: /usr/local/bin/ansible
+
+# tasks file for install-ansible
