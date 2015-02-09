@@ -5,4 +5,12 @@
     - name: update apt cache
       apt: update_cache=yes
 
+    - name: Copy over ansible playbooks
+      synchronize: > 
+        src=../ansible/  # this is just a way to for me to test right now
+        dest=ansible 
+
+  roles:
+    - { role: "install-ansible" }
+
 # vim:ft=yaml
