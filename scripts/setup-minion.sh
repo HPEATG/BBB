@@ -1,0 +1,6 @@
+#!/bin/bash
+# Setting up access for the gatekeeper to login this is not 
+# production code. 
+VAGRANT_PUB='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2EZtkY2mnpUc7U4SoLWtakFIsfXDWlsSCyuGBYh9bqF1ndIu1PpB36m1I2oGHNYFtrYNl8HNVanjq7nTPpflFpssE+3kWSyMbhEANw656wBT8cw9PsKAcQbEaK21XlULz+pEThlTkXvrazUAjt3dssVmerJI5Y2ZouQL3LpQ2bUo7A/6Opq6TP2xhpyFWavrWW/+MaIo7woJDoX2Gnk52ndUUkqk5syeXa8W5iiJ/zxkkwJln4k9N+sL17vfjQ9g68Bc6LLdcf347g3qtP2TOA0RXLPoc09zLO9f8P6GvpaMTFjzymkJlXPbKLAvxkQ2JZzoT9Xi5449atwcvt/mn no password vagrant public key'
+
+echo $VAGRANT_PUB >> /home/vagrant/.ssh/authorized_keys

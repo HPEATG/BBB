@@ -7,7 +7,7 @@
 
     - name: Copy over ansible playbooks
       synchronize: > 
-        src=../ansible/  # this is just a way to for me to test right now
+        src=../provisioning/  # this is just a way to for me to test right now
         dest=ansible 
 
   roles:

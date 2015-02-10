@@ -13,9 +13,28 @@ SERVERS_CONF = ENV['SERVERS_CONF'] || 'servers.yaml'
 
 # Read YAML file with box details
 servers = YAML.load_file( SERVERS_CONF )
- 
+
+# Check for missing vagrant plugins
+required_plugins = %w( vagrant-hostmanager )
+required_plugins.each do |plugin|
+  raise " #{plugin} is not installed!" unless Vagrant.has_plugin? plugin
+end
+
 # Create boxes
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Using the vagrant-hostmanager plugin to make life easier
+  if Vagrant.has_plugin?("vagrant-hostmanager")
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = false
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+  end
+  # Speed thing up if we cache packages 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
+    config.cache.scope = :box
+  end 
   # Iterate through entries in YAML file server section
   servers['servers'].each do |servers|
     config.vm.define servers["name"] do |vm_config|
@@ -57,7 +76,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       # Provision the VM with ansible 
-      #
+      #:1
+
       if servers["ansible"]
         vm_config.vm.provision :ansible do |ansible|
           ansible.playbook = servers["ansible"]

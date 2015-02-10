@@ -3,7 +3,44 @@
 # This is where I expect to run ansible from the gatekeeper VM to 
 # configure the minions. By doing this it will replicate a real
 # world senario.
+VAGRANT_PUB='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2EZtkY2mnpUc7U4SoLWtakFIsfXDWlsSCyuGBYh9bqF1ndIu1PpB36m1I2oGHNYFtrYNl8HNVanjq7nTPpflFpssE+3kWSyMbhEANw656wBT8cw9PsKAcQbEaK21XlULz+pEThlTkXvrazUAjt3dssVmerJI5Y2ZouQL3LpQ2bUo7A/6Opq6TP2xhpyFWavrWW/+MaIo7woJDoX2Gnk52ndUUkqk5syeXa8W5iiJ/zxkkwJln4k9N+sL17vfjQ9g68Bc6LLdcf347g3qtP2TOA0RXLPoc09zLO9f8P6GvpaMTFjzymkJlXPbKLAvxkQ2JZzoT9Xi5449atwcvt/mn no password vagrant public key'
 
+cat > /home/vagrant/.ssh/id_rsa <<EOF
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAthGbZGNpp6VHO1OEqC1rWpBSLH1w1pbEgsrhgWIfW6hdZ3SL
+tT6Qd+ptSNqBhzWBba2DZfBzVWp46u50z6X5RabLBPt5FksjG4RADcOuesAU/HMP
+T7CgHEGxGittV5VC8/qRE4ZU5F762s1AI7d3bLFZnqySOWNmaLkC9y6UNm1KOwP+
+jqaukz9sYachVmr61lv/jGiKO8KCQ6F9hp5Odp3VFJKpObMnl2vFuYoif88ZJMCZ
+Z+JPTfrC9e7340PYOvAXOiy3XH9+O4N6rT9kzgNEVyz6HNPcyzvX/D+hr6WjExY8
+8ppCZVz2yiwL8ZENiWc6E/V4ueOPWrcHL7f5pwIDAQABAoIBAB9VkmfJkDJxCHxW
+WFtVTceNVQchI51a30EfR4Yr6/erVz/p1+1+cgChUOOb73TkqXzFwvp1UnQd2eec
+2G+wQeFR3ljiKqnCjq06qodz6QBpNHNqHfV6EWQrjh5R4QSUxKwWsIcqtEuFaSjk
+8Cf1eFE1iJX9X0EPMV3OkYsW8h0XkY7DWybujfPCHHzUK9FLeDwWJHFR971TS/1L
+peUsOCnz/Lcltmtd93teRVE9zOxckHWkLtCokCR8Aov/lQ7xIhz2C9PM5KMQlRjV
+7faIkvzctZNA8zCRl2RRrCysUwIpUTnnbuhoqOItMo/TUpUyDLLp53fPIx02CN0n
+XvozzgECgYEA6Fe1f51kgatTpyK7TEaHOvLZw3c9lMbV5sBCoj0AI2uHk9XWv1VB
+aehE1uDEFiWy69eZ/cmxAVRUanaYiCzP+NBeJ+OAiqNgP+ZN3cYeBzs1NLJ0F5dj
+VOESggB+SE8FX3jBl0oo9Nz/Qwn3TPthROicPlbuXZS8hK+Js6w/lKcCgYEAyJtz
+IX38omD2gChG/dxcX1KlyflglzBySTNCGFjBEYz0vSUq3dxyOJTC0s3mKSxuuu0g
+skAgoHSHNGLfY5pwq9Lhz4VSQwM5Ea2i8vt0ZvXLKy0BjPysEPBVZv+UaoxPefre
+cfUrHfDQ5UZ2MekTe54rRzw7ISEWG6RLZZcQEwECgYEAufB3cAmlxaA28ir5ebF3
+x9VSMPvcbJQz2tdCfFQVKEOF3OnlUnoIP5mCffSi+JZy+gsxUcl3vnielhUTPOeg
+CJ+4unN3C3x0Kq9E4ZcLsP3RNrsZ7UdaVzNIfIGojnWu9xjM1SakYFH8dsoi/5it
+31fIspsfaAUAWa+hpAjVWUECgYBTKeaLzvAJ3QqzzH7JxS3iMqAaYDDD3Mi0QfS3
+pSu8++OF+j+QJFCR1lICFGvDS/FHuwBgBSfBfS2D8S1M3HyzLsSARHP65f4lrwcr
+lkUGXgVxC8Jl0WX/y7KL9Y5wsWRNXEwVkB7k1a20LwbW4Bo8mDC24mhc7pt8sBq1
+re9zAQKBgDdEWffa4gUeqbIdgwxLvOOGTAO0+J9Ed+tY2DGx7LvbcJ2U14Ik8+lL
+nbWxw3XXWOkTtsxYuaHH9rC3KlnOnSMWO03L62kVKqP+bRubt/NvDt3Hw90rV2vv
+5wHAOJewBVD8IYEMRoi9mwWhlOanpj5tVk/VTu9QAeqQOAv6KvYf
+-----END RSA PRIVATE KEY-----
+EOF
+echo $VAGRANT_PUB > /home/vagrant/.ssh/id_rsa.pub
+chmod 600 /home/vagrant/.ssh/id_rsa
+chmod 600 /home/vagrant/.ssh/id_rsa.pub
+
+chown -R vagrant.vagrant /home/vagrant/.ssh
+
+# More things just for the gatekeeper
 touch BINGO
 
 echo "Yep got here"
