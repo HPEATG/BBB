@@ -9,24 +9,23 @@ defaults: &defaults
   <<: *virtualbox
 
 servers:
-  - name: gatekeeper
-    <<: *defaults
-    ansible: "ansible/main.yml"
-    #ip: "172.17.8.100"  # If you rather not have Virtualbox use DHCP 
-    #bridge: "en1: Wi-Fi (AirPort)"
-
   - name: minion-01
     <<: *defaults
-    ansible: "ansible/main.yml"
+    ansible: "provisioning/main.yml"
     #ip: "172.17.8.101"
 
   - name: minion-02
     <<: *defaults
-    ansible: "ansible/main.yml"
+    ansible: "provisioning/main.yml"
     #ip: "172.17.8.102"
 
   - name: minion-03
     <<: *defaults
-    ansible: "ansible/main.yml"
+    ansible: "provisioning/main.yml"
     #ip: "172.17.8.103"
   
+  - name: gatekeeper
+    <<: *defaults
+    ansible: "provisioning/main.yml"
+    #ip: "172.17.8.100"  # If you rather not have Virtualbox use DHCP 
+    #bridge: "en1: Wi-Fi (AirPort)"

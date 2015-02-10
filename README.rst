@@ -34,6 +34,8 @@ A common development environment when working with multiple individules.
 #. Requirements
 
    - `Vagrant 1.6.3 <https://www.vagrantup.com/>`_
+     - plugins
+       - vagrant-hostmanager
    - `Ansible 1.8 <http://www.ansible.com/>`_
    - `VirtualBox 4.3.20r96996 <https://www.virtualbox.org>`_
 
